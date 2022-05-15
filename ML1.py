@@ -1,4 +1,9 @@
 from sklearn import datasets
-iris_dataset = datasets.load_iris()
+import matplotlib.pyplot as plt 
+digit_dataset = datasets.load_digits()
 
-print(iris_dataset.keys())
+print(digit_dataset.target[0])
+plt.imshow(digit_dataset.images[0],cmap = plt.get_cmap('gray'))
+plt.show()
+
+
