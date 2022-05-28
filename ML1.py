@@ -1,7 +1,21 @@
-from sklearn import datasets
+from scipy.io import loadmat
 import matplotlib.pyplot as plt
-digit_dataset = datasets.load_digits()
 
-print(digit_dataset.target[0])
-plt.imshow(digit_dataset.images[0], cmap=plt.get_cmap('gray'))
+mnist_raw = loadmat('mnist-original.mat')
+
+mnist = {
+    'data': mnist_raw['data'].T,
+    'target': mnist_raw['label'][0]
+}
+
+x = mnist['data']
+y = mnist['target']
+
+
+number = x[10000]
+number_image = number.reshape(28, 28)
+
+print(y[10000])
+plt.imshow(number_image, cmap=plt.cm.binary, interpolation='nearest')
+
 plt.show()
