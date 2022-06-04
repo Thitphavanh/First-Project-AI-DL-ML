@@ -16,5 +16,5 @@ print(y_trian.shape)
 print(y_test.shape)
 
 # 150
-# train 75 % = 112
-# test 25 % = 38
+# train 80 % = 120
+# test 2 % = 30
