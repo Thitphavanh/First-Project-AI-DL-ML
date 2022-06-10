@@ -34,8 +34,7 @@ y_pred = model.predict(x_test)
 # plt.show()
 
 # compare true data & predict data
-df = pd.DataFrame({'Actually': y_test.flatten(),
-				  'Predicted': y_pred.flatten()})
+df = pd.DataFrame({'Actually': y_test.flatten(),'Predicted': y_pred.flatten()})
 
 # print(df.head())
 
