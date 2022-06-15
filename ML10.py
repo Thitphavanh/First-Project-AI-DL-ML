@@ -33,19 +33,19 @@ x_train, x_test, y_train, y_test = x[:60000], x[60000:], y[:60000], y[60000:]
 # 5
 # True, False
 
-# class 0 ບໍ່ແມ່ນ class 0
-# ຂໍ້ມູນຄ່າ 5000 -> model -> class 0 ຫຼືບໍ? True : False
+# class 5 ບໍ່ແມ່ນ class 5
+# ຂໍ້ມູນຄ່າ 5000 -> model -> class 5 ຫຼືບໍ? True : False
 # y_train = [0,0,........,9....,9]
-predict_number = 500
-y_train_0 = (y_train == 0)
-y_test_0 = (y_test == 0)
+predict_number = 5500
+y_train_5 = (y_train == 5)
+y_test_5 = (y_test == 5)
 
 # y_train_0 = [true,true,........,false....,false]
 
 
 sgd_clf = SGDClassifier()
-sgd_clf.fit(x_train, y_train_0)
+sgd_clf.fit(x_train, y_train_5)
 
 
-displayPredict(sgd_clf, y_test_0[predict_number], x_test[predict_number])
+displayPredict(sgd_clf, y_test_5[predict_number], x_test[predict_number])
 displayImage(x_test[predict_number])
