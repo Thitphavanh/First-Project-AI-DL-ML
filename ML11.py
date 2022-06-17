@@ -7,6 +7,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import cross_val_predict
 import itertools
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
 
 
 def displayConfusionMatrix(cm, cmap=plt.cm.GnBu):
@@ -20,8 +22,8 @@ def displayConfusionMatrix(cm, cmap=plt.cm.GnBu):
     thresh = cm.max()/2
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], 'd'),
-        horizontalalignment='center',
-        color='white' if cm[i, j] > thresh else 'black')
+                 horizontalalignment='center',
+                 color='white' if cm[i, j] > thresh else 'black')
 
     plt.tight_layout()
     plt.ylabel('Actually')
@@ -74,5 +76,8 @@ sgd_clf.fit(x_train, y_train_5)
 y_train_pred = cross_val_predict(sgd_clf, x_train, y_train_5, cv=3)
 cm = confusion_matrix(y_train_5, y_train_pred)
 
-plt.figure()
-displayConfusionMatrix(cm)
+y_test_pred = sgd_clf.predict(x_test)
+
+# classes = ['Other Number', 'Number 5']
+# print(classification_report(y_test_5, y_test_pred, target_names=classes))
+print('Accuracy Score = ', accuracy_score(y_test_5, y_test_pred)*100)
