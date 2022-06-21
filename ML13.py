@@ -1,6 +1,7 @@
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report
 
 
 iris_dataset = load_iris()
@@ -8,14 +9,15 @@ x_train, x_test, y_train, y_test = train_test_split(iris_dataset['data'], iris_d
 
 
 # Model
-knn = KNeighborsClassifier(n_neighbors=1)
+knn = KNeighborsClassifier(n_neighbors=3)
 
 
 # training
 knn.fit(x_train, y_train)
 
 # prediction
-pred = knn.predict([x_test[0]])
+y_pred = knn.predict(x_test)
 
-print('ຜົນການພະຍາກອນ', pred)
-print('ທຳນານວ່າຢູ່ໃນກຸ່ມສາຍພັນ', iris_dataset['target_names'][pred])
+print(classification_report(y_test, y_pred,target_names=iris_dataset['target_names']))
+print(x_test.shape)
+print('ຄວາມແມ່ນຍຳ =',accuracy_score(y_test,y_pred)*100)
