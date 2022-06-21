@@ -15,6 +15,7 @@ knn = KNeighborsClassifier(n_neighbors=3)
 # training
 knn.fit(x_train, y_train)
 
+
 # prediction
 y_pred = knn.predict(x_test)
 
