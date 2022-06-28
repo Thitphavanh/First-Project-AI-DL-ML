@@ -17,7 +17,7 @@ def clean_data(dataset):
 
 def split_feature_class(dataset, feature):
     features = dataset.drop(feature, axis=1)  # ເອົາຂໍ້ມູນທັງໝົດຍົກເວັ້ນ income
-    labels = dataset[feature].copy()  # ເອົາຂໍ້ມູນສະເພາະ income
+    labels = dataset[feature].copy()  # ເອົາສະເພາະຂໍ້ມູນ income
     return features, labels
 
 
