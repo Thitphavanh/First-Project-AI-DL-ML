@@ -23,12 +23,12 @@ plt.figure(figsize=(8, 4))
 # image feature 784
 plt.subplot(1, 2, 1)
 plt.imshow(mnist['data'][0].reshape(28, 28),cmap=plt.cm.gray, interpolation='nearest')
-plt.xlabel('784 Components')
+plt.xlabel('ຂະໜາດຮູບ 784 Pixels')
 plt.title('ຮູບດັ່ງເດີມ')
 
 # image feature 95% -> 154
 plt.subplot(1, 2, 2)
 plt.imshow(result[0].reshape(28, 28),cmap=plt.cm.gray, interpolation='nearest')
-plt.xlabel('43 Components')
+plt.xlabel('ຂະໜາດຮູບ 43 Pixels')
 plt.title('ຮູບຫຼັງຈາກຫຼຸດຂະໜາດ')
 plt.show()
