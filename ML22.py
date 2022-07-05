@@ -1,27 +1,41 @@
-from sklearn.datasets import make_blobs
+from turtle import color
+from sklearn.datasets import fetch_lfw_people
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-
-x, y = make_blobs(n_samples=300, centers=4, cluster_std=0.5, random_state=0)
-
-# new point
-x_test, y_test = make_blobs(n_samples=10, centers=4, cluster_std=0.5, random_state=0)
-
-# print(x[:, 1])
-# print(y.shape)
-model = KMeans(n_clusters=4)
-model.fit(x)
-y_pred = model.predict(x)
-y_pred_new = model.predict(x_test)
-centers = model.cluster_centers_
+from sklearn.decomposition import PCA
+from sklearn.pipeline import make_pipeline
+from sklearn.svm import SVC
+from sklearn.svm import SVC
+from sklearn.model_selection import *
 
 
-print(centers)
-plt.scatter(x[:, 0], x[:, 1], c=y_pred)
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_pred_new, s=120)
-plt.scatter(centers[0, 0], centers[0, 1], c='purple', label='ຕຳແໜ່ງ Centroid 1')
-plt.scatter(centers[1, 0], centers[1, 1], c='black', label='ຕຳແໜ່ງ Centroid 2')
-plt.scatter(centers[2, 0], centers[2, 1], c='green', label='ຕຳແໜ່ງ Centroid 3')
-plt.scatter(centers[3, 0], centers[3, 1], c='yellow', label='ຕຳແໜ່ງ Centroid 4')
-plt.legend(frameon=True)
+# download & display image
+faces = fetch_lfw_people(min_faces_per_person=60)
+# print(faces.target_names)
+# print(faces.images.shape)
+
+
+'''
+fig, ax = plt.subplots(3, 5)
+for i, axi in enumerate(ax.flat):
+    axi.imshow(faces.images[i], cmap='bone')
+    axi.set(xticks=[], yticks=[])
+    axi.set_ylabel(faces.target_names[faces.target[i]].split()[-1], color='black')
 plt.show()
+'''
+
+# reduce & create model
+pca = PCA(n_components=150, svd_solver='randomized', whiten=True)
+svc = SVC(kernel='rbf', class_weight='balanced')
+model = make_pipeline(pca, svc)
+
+# train, test data
+x_train, x_test, y_train, y_test = train_test_split(faces.data, faces.target, random_state=40)
+param = {'svc__C': [1, 5, 10, 50], 'svc__gamma': [0.0001, 0.0005, 0.001, 0.005]}
+
+# train data to model
+grid = GridSearchCV(model, param)
+grid.fit(x_train, y_train)
+# print(grid.best_estimator_)
+
+model=grid.best_estimator_
+# predict
