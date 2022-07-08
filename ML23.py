@@ -19,8 +19,6 @@ shuffle = np.random.permutation(70000)
 x, y = x[shuffle], y[shuffle]
 x_train, x_test, y_train, y_test = x[:60000], x[60000:], y[:60000], y[60000:]
 
-
-
 # create model
 model = MLPClassifier()
 model.fit(x_train, y_train)
